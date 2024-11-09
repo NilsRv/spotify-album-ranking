@@ -48,7 +48,7 @@ function App() {
 
   const refreshAccessToken = () => {
     axios
-      .get(`http://localhost:8888/refresh_token?refresh_token=${refreshToken}`)
+      .get(`/api/refresh_token?refresh_token=${refreshToken}`)
       .then(response => {
         setAccessToken(response.data.access_token);
       })
@@ -57,6 +57,7 @@ function App() {
         setError('Impossible de rafraîchir le token.');
       });
   };
+  
 
   useEffect(() => {
     if (accessToken) {
@@ -104,9 +105,9 @@ function App() {
   }, [accessToken]);
 
   const handleLogin = () => {
-    console.log('Redirecting to login...');
-    window.location.href = 'http://localhost:8888/login';
+    window.location.href = '/api/login';
   };
+  
 
   const handleLogout = () => {
     setAccessToken(null);
