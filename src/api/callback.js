@@ -9,6 +9,10 @@ export default async function handler(req, res) {
   const client_secret = process.env.CLIENT_SECRET;
   const redirect_uri = process.env.REDIRECT_URI;
 
+  if (!code) {
+    return res.status(400).json({ error: 'No code provided' });
+  }
+
   try {
     const response = await axios({
       method: 'post',
@@ -34,6 +38,7 @@ export default async function handler(req, res) {
 
     res.redirect(`/?${queryParams}`);
   } catch (error) {
-    res.send(error);
+    console.error('Error in /api/callback:', error.response?.data || error.message);
+    res.status(500).json({ error: 'Failed to get access token' });
   }
 }

@@ -37,7 +37,9 @@ function App() {
   const [selectedAlbum, setSelectedAlbum] = useState(null);
 
   useEffect(() => {
-    const { accessToken, refreshToken } = getQueryParams();
+    const params = getQueryParams();
+    console.log('Params:', params);
+    const { accessToken, refreshToken } = params;
     if (accessToken) {
       console.log('Access Token:', accessToken);
       setAccessToken(accessToken);
